@@ -13,14 +13,14 @@ public class SliderOOP {
         @Override
         public void stateChanged(ChangeEvent e) {
             JSlider source = (JSlider)e.getSource();
-            subject.setState(source.getValue());
+            subject.setState(source.getValue());            
         }    
     }
 
         
     
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Test");
+        JFrame frame = new JFrame("SliderOOP");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         frame.setSize(500,500);
         frame.setLayout(new GridLayout(10, 10));
@@ -36,10 +36,12 @@ public class SliderOOP {
         }
         
         
-        SliderObserver slider = new SliderObserver(true, subject);
+        SliderObserver sliderOposite = new SliderObserver(true, subject);
+        subject.attach(sliderOposite);
+        sliderOposite.getSlider().addChangeListener(new SliderListener());
+        frame.add(sliderOposite.getSlider());
         
-        slider.getSlider().addChangeListener(new SliderListener());
-        frame.add(slider.getSlider());
+        
         frame.setVisible(true);
     }
     
